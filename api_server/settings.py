@@ -38,6 +38,9 @@ class Settings(BaseSettings):
 
     log_level: LogLevel = LogLevel.INFO
 
+    # max number of threads
+    capacity_limiter: int = 40
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_prefix="API_SERVER_",

@@ -18,7 +18,7 @@ from typing import Any
 #             ], p = 1.0)
 
 
-class Inference:
+class Image_Inference:
     def __init__(self) -> None:
         self.model = None
 

@@ -1,4 +1,4 @@
 """Main API."""
-from API_Server.web.api.main.views import router
+from api_server.web.api.main.views import router
 
 __all__ = ['router']
