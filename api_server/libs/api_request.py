@@ -1,5 +1,6 @@
 import requests
 from requests.adapters import HTTPAdapter
+from requests.exceptions import ConnectionError, SSLError, ConnectTimeout, ReadTimeout
 
 from loguru import logger
 from api_server.settings import settings
@@ -67,6 +68,21 @@ class Requests_Handler:
             else:
                 logger.error(f"Request to {url} using {method} failed with status code: {response.status_code}")
             return response
+        except SSLError as e:
+            logger.error(f"Request to {url} using {method} encountered an SSL error: {e}")
+            return None
+        except ConnectTimeout as e:
+            logger.error(f"Request to {url} using {method} encountered a connect timeout error: {e}")
+            return None
+        except ReadTimeout as e:
+            logger.error(f"Request to {url} using {method} encountered a read timeout error: {e}")
+            return None
+        except ConnectionError as e:
+            logger.error(f"Request to {url} using {method} encountered a connection error: {e}")
+            return None
         except requests.exceptions.RequestException as e:
             logger.error(f"Request to {url} using {method} encountered an exception: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Unexpected exception during request to {url} using {method}: {e}")
             return None
