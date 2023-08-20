@@ -38,14 +38,40 @@ class Settings(BaseSettings):
 
     log_level: LogLevel = LogLevel.INFO
 
-    # max number of threads
-    capacity_limiter: int = 40
-
     model_config = SettingsConfigDict(
         env_file=".env",
         env_prefix="API_SERVER_",
         env_file_encoding="utf-8",
     )
+
+    # max number of threads
+    capacity_limiter: int = 40 # Default: 40
+
+
+    # HTTPAdapter Settings
+    # These settings are primarily used to control the behavior of the connection pool.
+
+    # pool_connections: Controls the maximum number of URIs that can be opened at once.
+    pool_connections: int = 10  # Default: 10
+
+    # pool_maxsize: The maximum number of connections in the connection pool. When the number of connections reaches this number, new requests will wait until a connection is released.
+    pool_maxsize: int = 10      # Default: 10
+
+    # max_retries: The number of times a request should be retried if it fails.
+    max_retries: int = 0        # Default: 0 (means no retries)
+
+    # pool_block: Determines if we should block and wait for a connection to be released when the connection pool reaches its maximum.
+    pool_block: bool = False     # Default: False (If True, requests will be blocked until a connection becomes available when the pool is full)
+
+
+    # Request Timeout Settings
+    # Set the timeout for connection and reading during a request.
+
+    # connect_timeout: The maximum time to wait for the server to establish a connection.
+    connect_timeout: int = 5    # Time to wait for server to establish a connection
+
+    # read_timeout: The maximum time to wait for a server response after sending a request.
+    read_timeout: int = 10      # Time to wait on a response after the request has been made
 
 
 settings = Settings()

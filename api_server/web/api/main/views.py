@@ -30,5 +30,5 @@ async def inference(item: Item) -> JSONResponse:
         logger.debug(result)
         return result
     except Exception as e:
-        logger.error(e)
-        return str(e)
+        logger.error("Exception: {}".format(str(e)))
+        return JSONResponse(status_code=500, content={"message": "Internal Server Error"})

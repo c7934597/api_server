@@ -20,6 +20,7 @@ yarl = "^1.9.2"
 ujson = "^5.8.0"
 httptools = "^0.6.0"
 loguru = "^0.7.0"
+requests = "^2.31.0"
 
 
 [tool.poetry.dev-dependencies]
@@ -35,6 +36,9 @@ pytest-cov = "^4.0.0"
 anyio = "^3.6.2"
 pytest-env = "^0.8.1"
 httpx = "^0.23.3"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.25.1"
 
 [tool.isort]
 profile = "black"
