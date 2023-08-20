@@ -74,4 +74,14 @@ class Settings(BaseSettings):
     read_timeout: int = 10      # Time to wait on a response after the request has been made
 
 
+    # Maximum number of concurrently executing jobs. This determines how many jobs can be executed simultaneously.
+    max_concurrent_jobs = 5
+
+    # The maximum number of retries when a job fails. If a job fails, it will try again this many times.
+    job_max_retries = 3
+
+    # Sleep time in seconds after job failure. This is the amount of time to wait before retrying to execute the job.
+    retry_sleep_time_jobs = 5
+
+
 settings = Settings()
