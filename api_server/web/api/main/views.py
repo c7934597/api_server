@@ -5,7 +5,7 @@ from loguru import logger
 from anyio.lowlevel import RunVar
 from anyio import CapacityLimiter
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 
 from api_server.settings import settings
@@ -29,6 +29,9 @@ async def inference(item: Item) -> JSONResponse:
         logger.debug(str(round(time_elapsed * 1000, 2)) + " ms")
         logger.debug(result)
         return result
+    except HTTPException as e:
+        logger.error("HTTPException: {}".format(str(e)))
+        return JSONResponse(status_code=e.status_code, content={"message": e.detail})
     except Exception as e:
         logger.error("Exception: {}".format(str(e)))
         return JSONResponse(status_code=500, content={"message": "Internal Server Error"})
