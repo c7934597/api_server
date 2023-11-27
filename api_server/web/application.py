@@ -25,12 +25,17 @@ def get_app() -> FastAPI:
     """
     configure_logging()
     app = FastAPI(
-        title="api_server",
-        description="Provide Member Sync & Update Operations",
+        title="API Server",
+        description="Provide API by Ming Gatsby.",
         version=metadata.version("api_server"),
-        docs_url="/api/docs",
-        redoc_url="/api/redoc",
-        openapi_url="/api/openapi.json",
+        contact={"name": "Ming Gatsby", "email": "laplace.ai.group@gmail.com"},
+        license_info={
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+        },
+        docs_url="/docs",
+        redoc_url="/redoc",
+        openapi_url="/openapi.json",
         default_response_class=UJSONResponse,
         debug=is_debug,
     )
@@ -53,6 +58,6 @@ def get_app() -> FastAPI:
     register_shutdown_event(app)
 
     # Main router for the API.
-    app.include_router(router=api_router, prefix="/api")
+    app.include_router(router=api_router, prefix="")
 
     return app
