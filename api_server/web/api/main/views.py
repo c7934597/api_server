@@ -26,7 +26,7 @@ async def inference(item: Item) -> JSONResponse:
         since = time.perf_counter()
         result = image_inference.run(item.models_name_list, item.file_path)
         time_elapsed = time.perf_counter() - since
-        logger.debug(str(round(time_elapsed * 1000, 2)) + "ms")
+        logger.debug(str(round(time_elapsed * 1000, 2)) + " ms")
         logger.debug(result)
         return result
     except Exception as e:
