@@ -44,6 +44,9 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
     )
 
+    # Enable gradio ui
+    use_gradio_ui: bool = True
+
     # max number of threads
     capacity_limiter: int = 40 # Default: 40
 

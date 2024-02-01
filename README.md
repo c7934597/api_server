@@ -17,6 +17,7 @@ poetry run python -m api_server
 This will start the server on the configured host.
 
 You can find swagger documentation at `/api/docs`.
+You can find gradio ui at `/gradio`.
 
 You can read more about poetry here: https://python-poetry.org/
 
