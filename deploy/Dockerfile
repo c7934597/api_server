@@ -1,6 +1,6 @@
 # Path: deploy/Dockerfile.prod
-FROM nvcr.io/nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04 as prod
-# FROM python:3.11.4-slim-bullseye as prod
+# FROM nvcr.io/nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04 as prod
+FROM python:3.12.0-slim-bullseye as prod
 
 # Set the timezone non-interactively
 ENV TZ=Asia/Taipei
@@ -32,17 +32,17 @@ RUN apt-get update && apt-get install -y \
     libzstd-dev \
     libffi-dev
 
-# Download and install the source code for Python 3.11.4
+# Download and install the source code for Python 3.12.0
 WORKDIR /tmp
-RUN wget https://www.python.org/ftp/python/3.11.4/Python-3.11.4.tgz &&\
-    tar -xf Python-3.11.4.tgz && \
-    rm -rf Python-3.11.4.tgz &&\
-    # Download and install the source code for Python 3.11.4
-    ./Python-3.11.4/configure --enable-optimizations &&\
+RUN wget https://www.python.org/ftp/python/3.12.0/Python-3.12.0.tgz &&\
+    tar -xf Python-3.12.0.tgz && \
+    rm -rf Python-3.12.0.tgz &&\
+    # Download and install the source code for Python 3.12.0
+    ./Python-3.12.0/configure --enable-optimizations &&\
     make -j$(nproc) &&\
     make altinstall &&\
-    pip3.11 install --upgrade pip &&\
-    pip3.11 install poetry==1.5.1 &&\
+    pip3.12 install --upgrade pip &&\
+    pip3.12 install poetry==1.5.1 &&\
     # Configuring poetry
     poetry config virtualenvs.create false
 
@@ -57,4 +57,4 @@ RUN poetry install
 
 EXPOSE 8000
 
-CMD ["/usr/local/bin/python3.11", "-m", "API_Server"]
+CMD ["/usr/local/bin/python3.12", "-m", "api_server"]
