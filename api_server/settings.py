@@ -86,5 +86,7 @@ class Settings(BaseSettings):
     # Sleep time in seconds after job failure. This is the amount of time to wait before retrying to execute the job.
     retry_sleep_time_jobs: int = 5
 
+    # The maximum size of the job queue. Controls how many jobs can be queued at once.
+    max_queue_size: int = 10
 
 settings = Settings()
